@@ -54,13 +54,13 @@ const Index = () => {
       <Flex height="100vh" alignItems="center" justifyContent="center">
         <Box p={8} maxWidth="500px" borderWidth={1} borderRadius={8} boxShadow="lg">
           <Heading mb={6} textAlign="center">
-            Time Card Login
+            タイムカードログイン
           </Heading>
           <Stack spacing={4}>
-            <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <Input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Input placeholder="メールアドレス" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Input placeholder="パスワード" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <Button colorScheme="blue" onClick={handleLogin}>
-              Login
+              ログイン
             </Button>
           </Stack>
         </Box>
@@ -71,46 +71,46 @@ const Index = () => {
   return (
     <Box p={8}>
       <Flex justifyContent="space-between" alignItems="center" mb={8}>
-        <Heading>Time Card Dashboard</Heading>
+        <Heading>タイムカードダッシュボード</Heading>
         <Button leftIcon={<FaUser />}>Profile</Button>
       </Flex>
       <Box mb={8} p={4} borderWidth={1} borderRadius={8}>
         <Heading as="h2" size="xl" mb={4}>
-          {clockedIn ? "Clocked In" : "Clocked Out"}
+          {clockedIn ? "出勤中" : "退勤中"}
         </Heading>
         <Text fontSize="3xl" mb={4}>
-          Total Hours: {totalHours.toFixed(2)}
+          合計時間: {totalHours.toFixed(2)}
         </Text>
         <Button colorScheme="green" size="lg" leftIcon={clockedIn ? <FaRegClock /> : <FaClock />} onClick={clockedIn ? handleClockOut : handleClockIn}>
-          {clockedIn ? "Clock Out" : "Clock In"}
+          {clockedIn ? "退勤" : "出勤"}
         </Button>
       </Box>
       <Flex justifyContent="space-between">
         <Button leftIcon={<FaHistory />} onClick={onOpen}>
-          Adjust Hours
+          時間調整
         </Button>
       </Flex>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Adjust Hours</ModalHeader>
+          <ModalHeader>時間調整</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <FormControl>
-              <FormLabel>Date</FormLabel>
+              <FormLabel>日付</FormLabel>
               <Input type="date" />
             </FormControl>
             <FormControl mt={4}>
-              <FormLabel>Start Time</FormLabel>
+              <FormLabel>開始時間</FormLabel>
               <Input type="time" />
             </FormControl>
             <FormControl mt={4}>
-              <FormLabel>End Time</FormLabel>
+              <FormLabel>終了時間</FormLabel>
               <Input type="time" />
             </FormControl>
             <Button mt={6} colorScheme="blue" onClick={handleManualAdjustment}>
-              Adjust
+              調整
             </Button>
           </ModalBody>
         </ModalContent>

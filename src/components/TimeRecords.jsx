@@ -5,7 +5,7 @@ const TimeRecords = ({ records }) => {
   return (
     <Box mt={8}>
       <Text fontSize="xl" fontWeight="bold" mb={4}>
-        勤務時間記録
+        タイムカード記録
       </Text>
       {records.map((record, index) => (
         <Text key={index} mb={2}>
