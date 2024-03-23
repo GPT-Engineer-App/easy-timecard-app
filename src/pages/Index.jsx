@@ -27,13 +27,13 @@ const Index = () => {
   const handleClockOut = () => {
     setClockedIn(false);
     const clockOutTime = new Date();
-    const hoursDiff = (clockOutTime - clockInTime) / 3600000;
-    setTotalHours(totalHours + hoursDiff);
+    const secondsDiff = Math.floor((clockOutTime - clockInTime) / 1000);
+    setTotalHours(totalHours + secondsDiff);
     setClockInTime(null);
 
     const newRecord = {
       date: clockOutTime.toLocaleDateString(),
-      hours: hoursDiff,
+      hours: secondsDiff / 3600,
     };
     setTimeRecords([...timeRecords, newRecord]);
   };
@@ -79,7 +79,7 @@ const Index = () => {
           {clockedIn ? "出勤中" : "退勤中"}
         </Heading>
         <Text fontSize="3xl" mb={4}>
-          合計時間: {totalHours.toFixed(2)}
+          合計時間: {Math.floor(totalHours / 3600)}時間 {Math.floor((totalHours % 3600) / 60)}分 {totalHours % 60}秒
         </Text>
         <Button colorScheme="green" size="lg" leftIcon={clockedIn ? <FaRegClock /> : <FaClock />} onClick={clockedIn ? handleClockOut : handleClockIn}>
           {clockedIn ? "退勤" : "出勤"}
