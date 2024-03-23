@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Button, Flex, Heading, Input, Stack, Text, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, useToast } from "@chakra-ui/react";
 import { FaClock, FaRegClock, FaHistory, FaUser } from "react-icons/fa";
+import TimeRecords from "../components/TimeRecords";
 
 const Index = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -9,6 +10,7 @@ const Index = () => {
   const [clockedIn, setClockedIn] = useState(false);
   const [clockInTime, setClockInTime] = useState(null);
   const [totalHours, setTotalHours] = useState(0);
+  const [timeRecords, setTimeRecords] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
@@ -25,9 +27,15 @@ const Index = () => {
   const handleClockOut = () => {
     setClockedIn(false);
     const clockOutTime = new Date();
-    const hoursDiff = (clockOutTime - clockInTime) / 3600000; // Convert ms to hours
+    const hoursDiff = (clockOutTime - clockInTime) / 3600000;
     setTotalHours(totalHours + hoursDiff);
     setClockInTime(null);
+
+    const newRecord = {
+      date: clockOutTime.toLocaleDateString(),
+      hours: hoursDiff,
+    };
+    setTimeRecords([...timeRecords, newRecord]);
   };
 
   const handleManualAdjustment = () => {
@@ -107,6 +115,7 @@ const Index = () => {
           </ModalBody>
         </ModalContent>
       </Modal>
+      <TimeRecords records={timeRecords} />
     </Box>
   );
 };
